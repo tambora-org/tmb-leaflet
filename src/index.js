@@ -1,21 +1,33 @@
 // https://astrid-guenther.de/dies-und-das/18-das-erste-leaflet-layer-plugin-ein-tutorial-fuer-anfaenger
 
 
-L.TamboraMarkerLayer = L.LayerGroup.extend({
-    initialize: function(options) {
+class TamboraMarkerLayer {
+    constructor(options) {
       L.setOptions(this, options);
-      L.LayerGroup.prototype.initialize.call(this, options);
+      //L.Layer.prototype.initialize.call(this, options);
       this.attributionUrl = "https://www.tambora.org";
+      this.groupLimit = 15;
+      if (Number.isInteger(options.grouping)) {
+        this.groupLimit = options.grouping;
+      }
+      if(typeof L.markerClusterGroup !== "function") {
+        this.groupLimit = 0;
+      }
+      this.markerLayer = new L.LayerGroup(options);
       //this.loadGeoJsonTambora();
-    },
-    addTo: function(map) {
+      //super(options);
+    }
+
+    addTo(map) {
+       this.map = map;
        this.loadGeoJsonTambora();
        var data = {icon: 'circle', markerColor: 'white', iconColor: '#000000', shape: 'circle', prefix: 'icon'};
        var marker =  L.ExtraMarkers.icon(data);
        var m = L.marker( [48, 8], {icon: marker} ); 
-       this.addLayer( m );        
-      L.LayerGroup.prototype.addTo.call(this, map);
-    },
+       this.markerLayer.addLayer( m );   
+       this.markerLayer.addTo(this.map);     
+      //L.Layer.prototype.addTo.call(this.markerLayer, map);
+    }
     /*
     addLayer: function (layer) {
       L.LayerGroup.prototype.addLayer.call(this, layer);
@@ -24,19 +36,28 @@ L.TamboraMarkerLayer = L.LayerGroup.extend({
       L.LayerGroup.prototype.removeLayer.call(this, layer);
     },
     */
-    getAttribution: function() {
+    getAttribution() {
       return "<a href='"+this.attributionUrl+"'>tambora.org</a>";
-    },
+    }
+
     addTmbMarkerToLayer(features) {  
-      this.clearLayers();
+      this.markerLayer.clearLayers();
+      this.map.removeLayer(this.markerLayer);
+      if((this.groupLimit > 0) && (features.length > this.groupLimit)) {
+        this.markerLayer = L.markerClusterGroup(this.options);
+      } else {
+        this.markerLayer = L.layerGroup(this.options);
+      }
       for(var i=0;i<features.length;i++) {
         var properties = features[i].properties;
         var data = {icon: 'circle', markerColor: 'white', iconColor: '#000000', shape: 'circle', prefix: 'icon'};
         var marker =  L.ExtraMarkers.icon(data);
         var m = L.marker( [properties.latitude, properties.longitude], {icon: marker} ); 
-        this.addLayer( m );          
+        this.markerLayer.addLayer( m );          
       } 
-    }, 
+      this.markerLayer.addTo(this.map);
+    }
+
     loadGeoJsonTambora() {
       var jsonBaseUrl =  "https://www.tambora.org/index.php/grouping/event/geojson?"; 
       var tmbBaseUrl = "https://www.tambora.org/index.php/grouping/event/list?mode=search&";
@@ -54,9 +75,9 @@ L.TamboraMarkerLayer = L.LayerGroup.extend({
        .then(response => {
            this.addTmbMarkerToLayer(response.data.features);
        });
-    },
+    }
 
-})
+}
 
 
 
