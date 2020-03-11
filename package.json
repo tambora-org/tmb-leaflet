@@ -1,8 +1,8 @@
 {
-  "name": "tmb-leaflet",
-  "version": "1.0.0",
-  "description": "Leaflet extension handling tambora",
-  "main": "src/index.js",
+  "name": "tambora-leaflet",
+  "version": "0.0.1",
+  "description": "Leaflet extension handling tambora data",
+  "main": "dist/tambora-leaflet.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,6 +22,7 @@
   "homepage": "https://github.com/tambora-org/tmb-leaflet#readme",
   "dependencies": {
     "axios": "^0.19.2",
+    "font-awesome": "^4.7.0",
     "leaflet": "^1.6.0",
     "leaflet-extra-markers": "^1.2.1",
     "leaflet.markercluster": "^1.4.1",
