@@ -108,7 +108,7 @@ var iconCodes = {
 "begin:null": {icon: 'fa-arrow-circle-o-left', markerColor: 'white', iconColor: '#00AA00', shape: 'square', prefix: 'fa'}, //x
 "end:null": {icon: 'fa-arrow-circle-o-right', markerColor: 'white', iconColor: '#00AA00', shape: 'square', prefix: 'icon'}, //x
 "wind force:10 bft: storm": {icon: 'fa-skyatlas', markerColor: 'pink', iconColor: '#000000', shape: 'star', prefix: 'fa'}, //x
-"wind force:9 bft: storm": {icon: 'fa-skyatlas', markerColor: 'pink', iconColor: '#111111', shape: 'star', prefix: 'fa'}, //x
+"wind force:9 bft: strong gale": {icon: 'fa-skyatlas', markerColor: 'pink', iconColor: '#111111', shape: 'star', prefix: 'fa'}, //x
 "wind force:7 bft: high wind": {icon: 'fa-skyatlas', markerColor: 'pink', iconColor: '#333333', shape: 'star', prefix: 'fa'}, //x
 "longterm precipitation:very wet": {icon: 'tint', markerColor: 'cyan', iconColor: '#FFFFFF', shape: 'circle', prefix: 'icon'},	
 "kind of goods:null": {icon: 'fa-shopping-cart', markerColor: 'violet', iconColor: '#000000', shape: 'penta', prefix: 'icon'}, //x
