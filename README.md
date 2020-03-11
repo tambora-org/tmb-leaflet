@@ -1,2 +1,2 @@
-# tmb-leaflet
-Leaflet extension handling tambora
+# tambora-leaflet
+Leaflet extension handling tambora data
