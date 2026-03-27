@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/tambora-org/tmb-leaflet#readme",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "font-awesome": "^4.7.0",
     "leaflet": "^1.6.0",
     "leaflet-extra-markers": "^1.2.1",
